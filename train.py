@@ -70,5 +70,9 @@ if __name__ == '__main__':
 
 	data_loader = CreateDataLoader(opt)
 	model = create_model(opt)
+	pretrained_gen = torch.load("checkpoints/experiment_name/latest_net_G.pth")
+	pretrained_disc = torch.load("checkpoints/experiment_name/latest_net_D.pth")
+	model.netG.load_state_dict(pretrained_gen)
+	model.netD.load_state_dict(pretrained_disc)
 	visualizer = Visualizer(opt)
 	train(opt, data_loader, model, visualizer)
